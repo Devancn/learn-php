@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        /*
+        *ajax对象的成员
+        * 属性:
+        *responseText:以字符串形式接收服务端返回的信息
+        * 方法:
+        * open() 创建新的http请求
+        * send()把请求发送给服务端
+        */
+        function f1(){
+            //ajax发起请求并接收返回的信息
+            //1)创建对象
+            var xhr=new XMLHttpRequest();
+            //2)创建新的http请求
+            xhr.open('get','./3.php');
+            //3)发起请求
+            xhr.send(null);
+
+            console.log(xhr.responseText);
+        }
+    </script>
+</head>
+<body>
+<h2>ajax接收服务器端返回的信息</h2>
+<input type="button" value="触发" onclick="f1()">
+</body>
+</html>

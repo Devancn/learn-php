@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function f1(){
+            //利用ajax去请求2.php服务端页面
+            //1)创建ajax对象
+            var xhr=new XMLHttpRequest();
+            //2)创建新的http请求(并设置请求地址)
+            //open(请求方法get/post,url请求地址)
+            xhr.open('get','./2.php');
+            //3)发送请求
+            //send(get-null/post-给服务器传递的信息)
+            xhr.send(null);
+        }
+    </script>
+</head>
+<body>
+    <h2>ajax发起对服务端的请求</h2>
+    <input type="button" value="触发" onclick="f1()">
+</body>
+</html>
