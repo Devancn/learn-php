@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function checkname(){
+            //ajax方法用户名校验
+            //1)获取用户名信息
+            var nm=document.getElementById('username').value;
+            //把用户名信息变为"请求字符串"
+            var info="name="+nm+"&age=23";
+            //对传递的特殊符号进行编码处理
+            //同时对”中文“也会进行编码处理
+           // nm=encodeURIComponent(nm);
+
+            //2)ajax校验
+            var xhr=new XMLHttpRequest();
+            //ajax事件设置,以便接收返回的信息
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4){
+                    alert(xhr.responseText);
+                }
+            };
+            xhr.open('post','./5.php');
+            //post方法传递是模拟form表单传递数据
+            //form表单的post格式数据是通过xml形式传递给服务器的
+            //以下setRequestHeader()方法必须要在open()方法后面调用
+            xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+            xhr.send(info);
+        }
+    </script>
+</head>
+<body>
+<h2>ajax之用户名校验(post方法)</h2>
+<p>用户名<input type="text" id="username" onblur="checkname()"></p>
+<p>手机号码:<input type="tel" id="usertel"></p>
+</body>
+</html>
