@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function f1(){
+            //ajax请求xml信息回来
+            //javascript的dom技术处理xml
+            //document  xmldocument
+            var xhr=new XMLHttpRequest();
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4){
+                    //alert(xhr.responseXML); //[object XMLDocument] 其是xml根节点的父节点对象
+                    var xmldom=xhr.responseXML;
+                   // console.log(xmldom.firstChild);
+                    var citys=xmldom.getElementsByTagName('city');
+                    //console.log(citys);//HTMLCollection[city, city, city]
+                    //citys[1] //第二个city的元素节点对象
+                    //for(var k in citys[1]){//k代表元素节点对象的成员名称
+                        //有输出其中一个成员方法：getElementsByTagName
+                        //结论：document对象 和普通元素对象都可以调用getElementsByTagName
+                      //  console.log(k);
+                    //}
+                    var s="";
+                    for(var i=0;i<citys.length;++i){
+                        var nm=citys[i].getElementsByTagName('name')[0].firstChild.nodeValue;
+                        var temp=citys[i].getElementsByTagName('temp')[0].firstChild.nodeValue;
+                        var wind=citys[i].getElementsByTagName('wind')[0].firstChild.nodeValue;
+                        s+="城市："+nm+"--温度:"+temp+"--风向"+wind+"<br>";
+                    }
+                    document.getElementById('result').innerHTML=s;
+                }
+            };
+            xhr.open('get','./7.xml');
+            xhr.send(null);
+        }
+    </script>
+</head>
+<body>
+    <h2>利用ajax+javascript实现对xml的接收和处理</h2>
+    <input type="button" value="触发" onclick="f1()">
+    <div id="result"></div>
+</body>
+</html>
