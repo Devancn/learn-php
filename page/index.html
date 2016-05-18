@@ -3,8 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style type="text/css">
+        h2,div{
+            width: 700px;margin:0 auto;
+        }
+        h2{
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        //制作函数(ajax获得分页信息)
+        function showpage(url){
+            var xhr=new XMLHttpRequest();
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4){
+                    document.getElementById('result').innerHTML=xhr.responseText;
+                }
+            };
+            xhr.open('get',url);
+            xhr.send(null);
+        }
+        window.onload=function(){
+            showpage('./data.php');
+        }
+    </script>
 </head>
 <body>
-    <h2></h2>
+    <h2>Ajax无刷新分页效果</h2>
+    <div id="result"></div>
 </body>
 </html>

@@ -62,7 +62,8 @@
 			if($this->page==1)
 				$html.='';
 			else
-				$html.="&nbsp;&nbsp;<a href='{$this->uri}&page=1'>{$this->config["first"]}</a>&nbsp;&nbsp;";
+//				$html.="&nbsp;&nbsp;<a href='{$this->uri}&page=1'>{$this->config["first"]}</a>&nbsp;&nbsp;";
+				$html.="&nbsp;&nbsp;<a href='javascript:showpage(\"{$this->uri}&page=1\")'>{$this->config["first"]}</a>&nbsp;&nbsp;";
 
 			return $html;
 		}
@@ -72,7 +73,8 @@
 			if($this->page==1)
 				$html.='';
 			else
-				$html.="&nbsp;&nbsp;<a href='{$this->uri}&page=".($this->page-1)."'>{$this->config["prev"]}</a>&nbsp;&nbsp;";
+//				$html.="&nbsp;&nbsp;<a href='{$this->uri}&page=".($this->page-1)."'>{$this->config["prev"]}</a>&nbsp;&nbsp;";
+				$html.="&nbsp;&nbsp;<a href='javascript:showpage(\"{$this->uri}&page=".($this->page-1)."\")'>{$this->config["prev"]}</a>&nbsp;&nbsp;";
 
 			return $html;
 		}
@@ -88,7 +90,8 @@
 				if($page<1)
 					continue;
 
-				$linkPage.="&nbsp;<a href='{$this->uri}&page={$page}'>{$page}</a>&nbsp;";
+//				$linkPage.="&nbsp;<a href='{$this->uri}&page={$page}'>{$page}</a>&nbsp;";
+				$linkPage.="&nbsp;<a href='javascript:showpage(\"{$this->uri}&page={$page}\")'>{$page}</a>&nbsp;";
 
 			}
 		
@@ -98,7 +101,8 @@
 			for($i=1; $i<=$inum; $i++){
 				$page=$this->page+$i;
 				if($page<=$this->pageNum)
-					$linkPage.="&nbsp;<a href='{$this->uri}&page={$page}'>{$page}</a>&nbsp;";
+//					$linkPage.="&nbsp;<a href='{$this->uri}&page={$page}'>{$page}</a>&nbsp;";
+					$linkPage.="&nbsp;<a href='javascript:showpage(\"{$this->uri}&page={$page}\")'>{$page}</a>&nbsp;";
 				else
 					break;
 			}
@@ -111,7 +115,7 @@
 			if($this->page==$this->pageNum)
 				$html.='';
 			else
-				$html.="&nbsp;&nbsp;<a href='{$this->uri}&page=".($this->page+1)."'>{$this->config["next"]}</a>&nbsp;&nbsp;";
+				$html.="&nbsp;&nbsp;<a href='javascript:showpage(\"{$this->uri}&page=".($this->page+1)."\")'>{$this->config["next"]}</a>&nbsp;&nbsp;";
 
 			return $html;
 		}
@@ -121,13 +125,14 @@
 			if($this->page==$this->pageNum)
 				$html.='';
 			else
-				$html.="&nbsp;&nbsp;<a href='{$this->uri}&page=".($this->pageNum)."'>{$this->config["last"]}</a>&nbsp;&nbsp;";
+				$html.="&nbsp;&nbsp;<a href='javascript:showpage(\"{$this->uri}&page=".($this->pageNum)."\")'>{$this->config["last"]}</a>&nbsp;&nbsp;";
 
 			return $html;
 		}
 
 		private function goPage(){
-			return '&nbsp;&nbsp;<input type="text" onkeydown="javascript:if(event.keyCode==13){var page=(this.value>'.$this->pageNum.')?'.$this->pageNum.':this.value;location=\''.$this->uri.'&page=\'+page+\'\'}" value="'.$this->page.'" style="width:25px"><input type="button" value="GO" onclick="javascript:var page=(this.previousSibling.value>'.$this->pageNum.')?'.$this->pageNum.':this.previousSibling.value;location=\''.$this->uri.'&page=\'+page+\'\'">&nbsp;&nbsp;';
+			//return '&nbsp;&nbsp;<input type="text" onkeydown="javascript:if(event.keyCode==13){var page=(this.value>'.$this->pageNum.')?'.$this->pageNum.':this.value;location=\''.$this->uri.'&page=\'+page+\'\'}" value="'.$this->page.'" style="width:25px"><input type="button" value="GO" onclick="javascript:var page=(this.previousSibling.value>'.$this->pageNum.')?'.$this->pageNum.':this.previousSibling.value;location=\''.$this->uri.'&page=\'+page+\'\'">&nbsp;&nbsp;';
+			return '&nbsp;&nbsp;<input type="text" onkeydown="javascript:if(event.keyCode==13){var page=(this.value>'.$this->pageNum.')?'.$this->pageNum.':this.value;showpage(\''.$this->uri.'&page=\'+page+\'\')}" value="'.$this->page.'" style="width:25px"><input type="button" value="GO" onclick="javascript:var page=(this.previousSibling.value>'.$this->pageNum.')?'.$this->pageNum.':this.previousSibling.value;showpage(\''.$this->uri.'&page=\'+page+\'\')">&nbsp;&nbsp;';
 		}
 		function fpage($display=array(0,1,2,3,4,5,6,7,8)){
 			$html[0]="&nbsp;&nbsp;共有<b>{$this->total}</b>{$this->config["header"]}&nbsp;&nbsp;";
