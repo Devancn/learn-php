@@ -28,7 +28,12 @@
                             //把已经获得记录的最大id值赋予给maxID
                             maxID=jn_info[i].id;
                         }
-                        document.getElementById('show_msg').innerHTML +=s;
+                        var showmsg=document.getElementById('show_msg');
+                        showmsg.innerHTML +=s;
+                        //设置滚动条卷起高度
+                        //卷起高度等于div本身高度,就可以 使得滚动条始终在最下边显示
+//                        showmsg.scrollTop=200
+                        showmsg.scrollTop=showmsg.scrollHeight;
                     }
                 };
                 xhr.open('get','./data.php?maxID='+maxID);
