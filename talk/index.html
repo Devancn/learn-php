@@ -10,9 +10,10 @@
 
         <script type="text/javascript">
             //通过ajax无刷新方式获得最新聊天内容
+            var maxID=0;
             function showmessage(){
                 var xhr=new XMLHttpRequest();
-                xhr.open('get','./data.php');
+                xhr.open('get','./data.php?maxID='+maxID);
                 xhr.onreadystatechange=function(){
                     if(xhr.readyState==4){
 //                        alert(xhr.responseText);
@@ -25,6 +26,8 @@
                             s +=jn_info[i].sender+"&nbsp;对&nbsp;"+jn_info[i].receiver+"&nbsp;";
                             s +=jn_info[i].biaoqing+"&nbsp;说"+jn_info[i].msg+"("+jn_info[i].add_time;
                             s +=")</p>";
+                            //把已经获得记录的最大id值赋予给maxID
+                            maxID=jn_info[i].id;
                         }
                         document.getElementById('show_msg').innerHTML +=s;
                     }
