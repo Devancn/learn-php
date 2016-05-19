@@ -18,7 +18,6 @@
 			$this->pageNum=ceil($this->total/$this->listRows);
 			$this->limit=$this->setLimit();
 		}
-
 		private function setLimit(){
 			return "Limit ".($this->page-1)*$this->listRows.", {$this->listRows}";
 		}
