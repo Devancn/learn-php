@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function get_weather(){
+            //ajax去请求json信息
+            //js做后期处理
+            var xhr=new XMLHttpRequest();
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4){
+//                    alert(xhr.responseText);
+                    //把接收的字符串json变为具体object的json信息
+                    eval("var jn_info="+xhr.responseText);
+                    console.log(jn_info);// Object { city="北京",  temp="18",  WD="东南风"}
+                    console.log(jn_info.city);//北京
+                    console.log(jn_info.WD);//东南风
+                    console.log(jn_info.temp);//18
+                }
+            };
+            xhr.open('get','./3.php');
+            xhr.send(null);
+        }
+        //在javascript里边，把字符串string变为对象object
+//        var obj="{name:'kitty',age:5}";
+        //eval(字符串参数) 字符串参数变为表达式运行
+//        eval("var cat="+obj);//eval("var cat={name:'kitty',age:5}");
+//        console.log(cat);
+    </script>
+</head>
+<body>
+    <h2>接收/处理json信息</h2>
+    <input type="button" value="获得天气" onclick="get_weather()">
+</body>
+</html>
