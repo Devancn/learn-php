@@ -9,11 +9,11 @@
             var fm=document.getElementsByTagName('form')[0];
             fm.onsubmit=function(evt){
                 //1)收集表单信息
-                //2)ajax负责收集好的信息传递给服务端
                 var nm=document.getElementById('username').value;
                 var pw=document.getElementById('userpwd').value;
                 var em=document.getElementById('usermail').value;
                 var info="name="+nm+"&pwd="+pw+"&email="+em;//请求字符串
+                //2)ajax负责收集好的信息传递给服务端
                 //2)ajax负责把收集好的信息传递给服务端
                 var xhr=new XMLHttpRequest();
                 xhr.onreadystatechange=function(){
@@ -34,9 +34,9 @@
 <body>
     <h2>无刷新方式收集表单信息并提交表单</h2>
     <form action="./4.php">
-        <p>用户名：<input type="text"  id="username"></p>
-        <p>密码：<input type="password" id="userpwd"></p>
-        <p>邮箱：<input type="text"  id="usermail"></p>
+        <p>用户名：<input type="text" name="mingzi"  id="username"></p>
+        <p>密码：<input type="password" name="mima" id="userpwd"></p>
+        <p>邮箱：<input type="text" name="youxiang"  id="usermail"></p>
         <p><input type="submit" value="注册"></p>
     </form>
 </body>
