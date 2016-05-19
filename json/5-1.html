@@ -12,7 +12,16 @@
                 var fd=new FormData(fm);//也可以使用this（其代表事件的元素节点对象）
                 //2)ajax传递表单信息到服务器
                 var xhr=new XMLHttpRequest();
-
+                //给ajax设置上传附件事件
+                xhr.upload.onprogress=function(evt){
+                    //通过事件对象感知附件上传情况
+//                    console.log(evt);
+                    var loaded=evt.loaded;//已经上传大小
+                    var total=evt.total;//总大小
+                    var per=Math.floor((loaded/total)*100)+"%";
+                    document.getElementById('son').innerHTML=per;
+                    document.getElementById('son').style.width=per;
+                };
                 xhr.onreadystatechange=function(){
                     if(xhr.readyState==4){
                         alert(xhr.responseText);
@@ -24,13 +33,26 @@
             };
         }
     </script>
+    <style type="text/css">
+        #pat{
+            width:440px;
+            height: 45px;
+            border: 5px solid blue;
+        }
+        #son{
+            width: 0;
+            height: 100%;
+            background: lightblue;
+        }
+    </style>
 </head>
 <body>
-<h2>无刷新方式上传附件</h2>
+<h2>无刷新方式上传附(大附件进度条设置)</h2>
 <form action="./5.php">
     <p>用户名：<input type="text" name="mingzi"  id="username"></p>
     <p>密码：<input type="password" name="mima" id="userpwd"></p>
     <p>邮箱：<input type="text" name="youxiang"  id="usermail"></p>
+    <div id="pat"><div id="son"></div></div>
     <p>头像：<input type="file" name="userpic"  id="userpic"></p>
     <p><input type="submit" value="注册"></p>
 </form>
